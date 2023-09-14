@@ -17,6 +17,8 @@ import axios from 'axios';
 
 function EndedMatches(){
 
+    const [load, setLoad] = useState(false)
+
     const { isOpen, onToggle } = useDisclosure();
 
     const [past, setPast] = useState([{
@@ -31,6 +33,7 @@ function EndedMatches(){
 
         const fetching = async () => {
 
+            setLoad(true);
 
             const url = 'https://api-football-v1.p.rapidapi.com/v3/fixtures?last=50';
             const options = {
@@ -63,8 +66,12 @@ function EndedMatches(){
                 setPast(ended)
                 console.log(ended)
 
-            } catch (error) {
+            }
+            catch (error) {
                 console.error(error);
+            }
+            finally{
+                setLoad(false)
             }
 
         }
@@ -90,43 +97,45 @@ function EndedMatches(){
 
     return(
 
-        <Card alignItems='center' bg='#231c2e' minH='max-content' minW='max-content' mb='15px' ml='15px' mr='15px' mt='10px'>
-            <CardHeader bg='transparent' >
-                <Heading bg='transparent'  color='#7b7b7b' size='lg' textAlign='center'>
-                    Recently Ended Matches
-                </Heading>
-            </CardHeader>
+        <>
+            <Heading bg='transparent'  color='#7b7b7b' ml='15px' size='md' textAlign='left'>
+                Recently Ended Matches
+            </Heading>
 
-            <CardBody bg='transparent' >
-                <UnorderedList justifyContent='center' listStyleType='none' spacing={5}>
-                    {past.map((passed, index) =>
-                        <ListItem color='whitesmoke' mt='20px' textAlign='center'>
-                            <Link key={index} >
-                                {passed.match}
-                            </Link>
-                            <Collapse in={isOpen} animateOpacity>
-                                <Box
-                                    p='40px'
-                                    color='white'
-                                    mt='4'
-                                    bg='#011021'
-                                    rounded='md'
-                                    shadow='md'
-                                >
+            <Card alignItems='center' bg='#231c2e' minH='max-content' minW='max-content' mb='15px' ml='15px' mr='15px' mt='10px'>
 
-                                    <Text bg='transparent'> Match : {passed.match} </Text>
-                                    <Text bg='transparent'> Match Date : {passed.date} </Text>
-                                    <Text bg='transparent'> Match League : {passed.league} </Text>
 
-                                    <Button onClick={() => save(index)} colorScheme='teal' mt='25px'> Save </Button>
-                                </Box>
-                            </Collapse>
-                        </ListItem>
-                    )}
-                </UnorderedList>
-            </CardBody>
+                <CardBody bg='transparent' >
+                    <UnorderedList bg='transparent' justifyContent='center' listStyleType='none' spacing={5}>
+                        {past.map((passed, index) =>
+                            <ListItem bg='transparent' color='whitesmoke' mt='20px' textAlign='center'>
+                                <Link key={index} onClick={onToggle}>
+                                    {passed.match}
+                                </Link>
+                                <Collapse in={isOpen} animateOpacity>
+                                    <Box
+                                        p='40px'
+                                        color='white'
+                                        mt='4'
+                                        bg='#011021'
+                                        rounded='md'
+                                        shadow='md'
+                                    >
 
-        </Card>
+                                        <Text bg='transparent'> Match : {passed.match} </Text>
+                                        <Text bg='transparent'> Match Date : {passed.date} </Text>
+                                        <Text bg='transparent'> Match League : {passed.league} </Text>
+
+                                        <Button onClick={() => save(index)} colorScheme='teal' mt='25px'> Save </Button>
+                                    </Box>
+                                </Collapse>
+                            </ListItem>
+                        )}
+                    </UnorderedList>
+                </CardBody>
+
+            </Card>
+        </>
 
     )
 }

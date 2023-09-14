@@ -21,6 +21,8 @@ interface test{
 
 function LiveMatches(){
 
+    const [load, setLoad] = useState(false)
+
     const { isOpen, onToggle } = useDisclosure()
 
     const [ongoing, setOngoing] = useState([{
@@ -34,6 +36,8 @@ function LiveMatches(){
 // Fetches the data with api variables and stores them as variables and objects
 
         const fetching = async () => {
+
+            setLoad(true);
 
             const url = 'https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all';
             const options = {
@@ -65,8 +69,12 @@ function LiveMatches(){
 
                 setOngoing(stillOn)
 
-            } catch (error) {
+            }
+            catch (error) {
                 console.error(error);
+            }
+            finally {
+                setLoad(false);
             }
 
         }
@@ -92,21 +100,18 @@ function LiveMatches(){
 
     return (
 
+        <>
+        <Heading bg='transparent'  color='#7b7b7b' ml='15px' size='md' textAlign='left'>
+            Live Matches
+        </Heading>
+
         <Card alignItems='center' bg='#231c2e' minH='max-content' minW='max-content' mb='10px' ml='15px' mr='15px' mt='15px'>
-
-            <CardHeader bg='transparent' >
-
-                <Heading bg='transparent'  color='#7b7b7b' size='lg' textAlign='center'>
-                    Live Matches
-                </Heading>
-
-            </CardHeader>
 
             <CardBody bg='transparent' >
 
-                <UnorderedList justifyContent='center' listStyleType='none' spacing={5}>
+                <UnorderedList bg='transparent' justifyContent='center' listStyleType='none' spacing={5}>
                     {ongoing.map((playing, index) =>
-                        <ListItem color='whitesmoke' mt='20px' textAlign='center'>
+                        <ListItem bg='transparent' color='whitesmoke' mt='20px' textAlign='center'>
 
                             <Link key={index} onClick={onToggle}>
                                 {playing.match}
@@ -135,8 +140,8 @@ function LiveMatches(){
 
             </CardBody>
 
-
         </Card>
+        </>
     )
 }
 

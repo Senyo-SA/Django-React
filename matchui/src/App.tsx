@@ -11,7 +11,7 @@ import CountryLeagues from "./components/CountryLeagues";
 
 function App() {
   return (
-    <Container bg='#090116' minHeight='100vh' minWidth='100%'>
+    <Container bg='#090116' minHeight='100vh' minWidth='100%' >
       <header>
         <Navbar/>
       </header>

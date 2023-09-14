@@ -14,7 +14,7 @@ function CountryLeagues(){
 
     return(
         <>
-        <Button bg='#414141'  color='whitesmoke' mt='50px' onClick={onOpen} > Popular Leagues </Button>
+        <Button bg='#231c2e'  color='#7b7b7b' mt='50px' onClick={onOpen} > Popular Leagues </Button>
         <Drawer
             isOpen={isOpen}
             onClose={onClose}
