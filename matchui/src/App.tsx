@@ -11,7 +11,7 @@ import CountryLeagues from "./components/CountryLeagues";
 
 function App() {
   return (
-    <Container bg='#090116' minHeight='100vh' minWidth='100%' >
+    <Container bgGradient='transparent' border='none' minHeight='100vh' minWidth='100%' >
       <header>
         <Navbar/>
       </header>
@@ -19,7 +19,7 @@ function App() {
       <body className='App'>
       <CountryLeagues/>
 
-      <Flex mt='20px' bg='#090116' minH='max-content'>
+      <Flex mt='20px' bg='transparent' minH='max-content'>
 
           <SimpleGrid columns={1} bg='transparent' minWidth='100%' borderRadius='10px'>
               <LiveMatches/>

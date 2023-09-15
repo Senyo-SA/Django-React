@@ -2,9 +2,8 @@ import {
     Box, Button,
     Card,
     CardBody,
-    CardHeader,
-    Collapse,
-    Heading,
+    Collapse, Flex,
+    Heading, Image,
     Link,
     ListItem, Text,
     UnorderedList,
@@ -18,13 +17,17 @@ function UpcomingMatches(){
 
     const [load, setLoad] = useState(false)
 
+    const [itemId, setItemId] = useState(0)
+
     const { isOpen, onToggle } = useDisclosure()
 
     const [nextTeams, setNextTeams] = useState([{
-                                                                                                        match: '',
-                                                                                                        date: '',
-                                                                                                        league: ''
-                                                                                                                }]);
+       match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: ''}]);
+
+    const identify = (index:number) => {
+        setItemId(index);
+        console.log(index);
+    }
 
     useEffect(() => {
 
@@ -38,7 +41,7 @@ function UpcomingMatches(){
             const options = {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': process.env["API_KEY "],
+                    'X-RapidAPI-Key': 'process.env["API_KEY "]',
                     'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
                 }
             };
@@ -53,12 +56,13 @@ function UpcomingMatches(){
 
                 for(let i = 0; i < 5; i++){
                     let homeTeam = dataArray[i].teams.home.name;
+                    let homeLogo = dataArray[i].teams.home.logo;
                     let awayTeam = dataArray[i].teams.away.name;
+                    let awayLogo = dataArray[i].teams.away.logo;
                     let datetime = dataArray[i].fixture.date;
                     let league = dataArray[i].league.name;
-                    upcoming[i] = {match: homeTeam.concat(' - ', awayTeam),
-                                    date: datetime,
-                                    league: league};
+                    upcoming[i] = {match: homeTeam.concat(' - ', awayTeam), leagues: league, matchDate:
+                                    datetime, homeLogo: homeLogo, awayLogo: awayLogo};
                 }
 
                 setNextTeams(upcoming)
@@ -73,7 +77,7 @@ function UpcomingMatches(){
             }
 
         }
-        // fetching()
+        fetching()
     }, []);
 
 // Returns the gotten data from their stored variables and objects to the page
@@ -85,16 +89,25 @@ function UpcomingMatches(){
                 Upcoming Matches
             </Heading>
 
-            <Card alignItems='center' bg='#231c2e' minH='max-content' minW='max-content' mb='10px' ml='15px' mr='15px' mt='10px'>
+            <Card alignItems='center' bgGradient='linear(to-r, #090116, grey, slategray, #090116)'
+                  minH='max-content' minW='max-content' mb='10px' ml='15px' mr='15px' mt='10px'>
 
                 <CardBody bg='transparent' >
                     <UnorderedList bg='transparent' justifyContent='center' listStyleType='none' spacing={5}>
                         {nextTeams.map((next, index) =>
-                            <ListItem bg='transparent' color='whitesmoke' mt='20px' textAlign='center'>
-                                <Link key={index} onClick={onToggle}>
-                                    {next.match}
-                                </Link>
-                                <Collapse in={isOpen} animateOpacity>
+                            <ListItem bg='transparent' color='#090116' mt='20px' onClick={() => identify(index)} textAlign='center'>
+
+                                <Flex bg='transparent' flexDirection='row' gap='4' justifyContent='space-between' >
+
+                                    <Image alignSelf='flex-start' alt='home logo' bg='transparent' src={next.homeLogo} />
+                                    <Link alignSelf='center' fontSize='lg' fontWeight='medium' key={index} onClick={onToggle}>
+                                        {next.match}
+                                    </Link>
+                                    <Image alt='away logo' bg='transparent' src={next.awayLogo} />
+
+                                </Flex>
+
+                                { itemId === index ? <Collapse in={isOpen} animateOpacity>
                                     <Box
                                         p='40px'
                                         color='white'
@@ -104,12 +117,13 @@ function UpcomingMatches(){
                                         shadow='md'
                                     >
                                         <Text bg='transparent'> Match : {next.match} </Text>
-                                        <Text bg='transparent'> Match Date : {next.date} </Text>
-                                        <Text bg='transparent'> Match League : {next.league} </Text>
+                                        <Text bg='transparent'> Match Date : {next.leagues} </Text>
+                                        <Text bg='transparent'> Match League : {next.matchDate} </Text>
 
                                         <Button colorScheme='teal' mt='25px'> Save </Button>
                                     </Box>
-                                </Collapse>
+                                </Collapse> : ''
+                                }
                             </ListItem>
                         )}
                     </UnorderedList>
