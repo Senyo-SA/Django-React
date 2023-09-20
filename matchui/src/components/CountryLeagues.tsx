@@ -5,7 +5,7 @@ import {
     DrawerBody,
     DrawerCloseButton,
     DrawerContent, DrawerFooter,
-    DrawerOverlay, List, ListItem, UnorderedList,
+    DrawerOverlay, ListItem, UnorderedList,
     useDisclosure
 } from "@chakra-ui/react";
 
@@ -26,6 +26,7 @@ function CountryLeagues(){
                 <DrawerCloseButton bg='#41414' color='whitesmoke'  />
                 <DrawerBody bg='#414141' color='#7b7b7b' pt='60px'>
                     <UnorderedList bg='#414141' color='whitesmoke' listStyleType='none' spacing={5}>
+
                         <ListItem bg='#414141'>English Premier League / UK</ListItem>
                         <ListItem bg='#414141'>La Liga / Spain</ListItem>
                         <ListItem bg='#414141'>Ligue 1/ France</ListItem>
@@ -34,7 +35,9 @@ function CountryLeagues(){
                         <ListItem bg='#414141'>World Cup</ListItem>
                         <ListItem bg='#414141'>African Cup of Nations</ListItem>
                         <ListItem bg='#414141'>COPA Americana</ListItem>
+                        
                     </UnorderedList>
+
                 </DrawerBody>
 
                 <DrawerFooter bg='#414141'>

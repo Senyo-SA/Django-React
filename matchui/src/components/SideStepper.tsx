@@ -7,9 +7,9 @@ import {Box, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSep
 
 
 const steps = [
-    { title: 'First', description: 'Live Matches' },
-    { title: 'Second', description: 'Past Matches' },
-    { title: 'Third', description: 'Ended Matches' },
+    { title: 'First', description: 'Live' },
+    { title: 'Second', description: 'Upcoming' },
+    { title: 'Third', description: 'Ended' },
 ]
 
 function SideStepper() {
@@ -19,14 +19,14 @@ function SideStepper() {
     })
 
     return (
-        <Stepper index={activeStep} orientation='vertical' height='400px' gap='0'>
+        <Stepper index={activeStep} orientation='vertical' height='inherit' gap='0'>
             {steps.map((step, index) => (
-                <Step key={index}>
+                <Step key={index} >
                     <StepIndicator>
                         <StepStatus
-                            complete={<StepIcon />}
+                            complete={<StepNumber />}
                             incomplete={<StepNumber />}
-                            active={<StepNumber />}
+                            active={<StepIcon />}
                         />
                     </StepIndicator>
 

@@ -27,7 +27,7 @@ function LiveMatches(){
     const { isOpen, onToggle } = useDisclosure();
 
     const [ongoing, setOngoing] = useState([{
-         match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: ''}]);
+         match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: '', match_type: ''}]);
 
     const identify = (index:number) => {
         setItemId(index);
@@ -54,7 +54,7 @@ function LiveMatches(){
             try {
                 const response = await fetch(url, options);
                 const result = await response.json();
-                // console.log(result.response);
+                console.log(result.response);
 
                 let dataArray = result.response;
                 let stillOn = ongoing;
@@ -69,7 +69,7 @@ function LiveMatches(){
                     let datetime = dataArray[i].fixture.date;
                     let league = dataArray[i].league.name;
                     stillOn[i] = {match: homeTeam.concat(' ', homeTeamGoals, ' - ', awayTeamGoals, ' ', awayTeam),
-                        leagues: league, matchDate: datetime, homeLogo: homeLogo, awayLogo: awayLogo}
+                        leagues: league, matchDate: datetime, homeLogo: homeLogo, awayLogo: awayLogo, match_type:"LIVE"}
                 }
 
                 setOngoing(stillOn)
@@ -84,13 +84,13 @@ function LiveMatches(){
 
         }
 
-         // fetching()
+          fetching()
     }, []);
 
 
     const save = async (index:number) => {
         try {
-            const response = await axios.post('http://127.0.0.1:2000/api/live_games/', ongoing[index]);
+            const response = await axios.post('http://127.0.0.1:2000/api/games/', ongoing[index]);
             console.log(response.data);
             // Process the response data or perform other operations
         } catch (error) {

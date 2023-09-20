@@ -20,9 +20,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'live_games', views.LiveMatches, 'live_games')
-router.register(r'ended_games', views.EndedMatches, 'ended_games')
-router.register(r'later_games', views.LaterMatches, 'later_games')
+router.register(r'games', views.Matches, 'matches')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

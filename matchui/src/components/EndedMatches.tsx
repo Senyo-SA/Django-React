@@ -25,7 +25,7 @@ function EndedMatches(){
     const { isOpen, onToggle } = useDisclosure();
 
     const [past, setPast] = useState(
-        [{ match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: ''}]);
+        [{ match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: '', match_type: ''}]);
 
     const identify = (index:number) => {
         setItemId(index);
@@ -67,7 +67,7 @@ function EndedMatches(){
                     let datetime = dataArray[i].fixture.date;
                     let league = dataArray[i].league.name;
                     ended[i] = {match: homeTeam.concat(' ', homeTeamGoals, ' - ', awayTeamGoals, ' ', awayTeam),
-                        leagues: league, matchDate: datetime, homeLogo: homeLogo, awayLogo: awayLogo}
+                        leagues: league, matchDate: datetime, homeLogo: homeLogo, awayLogo: awayLogo, match_type:"ENDED"}
                 }
 
                 setPast(ended)

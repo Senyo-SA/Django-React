@@ -22,7 +22,7 @@ function UpcomingMatches(){
     const { isOpen, onToggle } = useDisclosure()
 
     const [nextTeams, setNextTeams] = useState([{
-       match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: ''}]);
+       match: '', leagues: '', matchDate: '', homeLogo: '', awayLogo: '', match_type: ''}]);
 
     const identify = (index:number) => {
         setItemId(index);
@@ -62,7 +62,7 @@ function UpcomingMatches(){
                     let datetime = dataArray[i].fixture.date;
                     let league = dataArray[i].league.name;
                     upcoming[i] = {match: homeTeam.concat(' - ', awayTeam), leagues: league, matchDate:
-                                    datetime, homeLogo: homeLogo, awayLogo: awayLogo};
+                                    datetime, homeLogo: homeLogo, awayLogo: awayLogo, match_type: 'LATER'};
                 }
 
                 setNextTeams(upcoming)
