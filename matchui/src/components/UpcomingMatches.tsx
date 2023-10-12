@@ -41,7 +41,7 @@ function UpcomingMatches(){
             const options = {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': 'process.env["API_KEY "]',
+                    'process.env["API_KEY "]',
                     'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
                 }
             };
@@ -77,7 +77,7 @@ function UpcomingMatches(){
             }
 
         }
-        fetching()
+        //  fetching()
     }, []);
 
 // Returns the gotten data from their stored variables and objects to the page

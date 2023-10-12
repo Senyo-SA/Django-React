@@ -19,12 +19,12 @@ function SideStepper() {
     })
 
     return (
-        <Stepper index={activeStep} orientation='vertical' height='inherit' gap='0'>
+        <Stepper colorScheme='gray' index={activeStep} orientation='vertical' height='inherit' gap='0'>
             {steps.map((step, index) => (
                 <Step key={index} >
-                    <StepIndicator>
+                    <StepIndicator >
                         <StepStatus
-                            complete={<StepNumber />}
+                            complete={<StepIcon />}
                             incomplete={<StepNumber />}
                             active={<StepIcon />}
                         />

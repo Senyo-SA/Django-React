@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import {Container, Flex, SimpleGrid} from "@chakra-ui/react";
+import {Box, Container, Flex, SimpleGrid, Spacer} from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import LiveMatches from "./components/LiveMatches";
 import UpcomingMatches from "./components/UpcomingMatches";
 import EndedMatches from "./components/EndedMatches";
-import CountryLeagues from "./components/CountryLeagues";
+import SavedMatches from "./components/SavedMatches";
 import SideStepper from "./components/SideStepper";
+import PopularLeagues from "./components/PopularLeagues";
 
 // Contains all the various components to make up the complete page/app
 
@@ -18,7 +19,12 @@ function App() {
       </header>
 
       <body className='App'>
-      <CountryLeagues/>
+      <Box display='flex' alignItems='center' mt='25px' mb='25px' width='100%'>
+          <PopularLeagues/>
+          <Spacer bg='transparent'/>
+          <SavedMatches/>
+      </Box>
+
 
       <Flex mt='20px' bg='transparent' minH='max-content'>
 
